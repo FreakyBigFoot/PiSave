@@ -1,6 +1,5 @@
 #!/usr/bin/python
 import fnmatch, os, dropbox, time
-from tqdm import *
 from dropbox.files import WriteMode
 
 #This Is Your Unique Key Given By Dropbox
@@ -18,9 +17,7 @@ for root, dirs, files in os.walk(r'/home/pi/RetroPie/roms'):
     for saves in files:
         file_path = root + '/' + saves
         dest_path = root + '/' + saves
-        if saves.endswith(filetypes):
-            #for each in tqdm(saves):
-                #continue                
+        if saves.endswith(filetypes):              
             f = open(file_path)
             file_size = os.path.getsize(file_path)
             if file_size <= CHUNK_SIZE:

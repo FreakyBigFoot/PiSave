@@ -13,6 +13,15 @@ CHUNK_SIZE = 4 * 1024 * 1024
 #Add File Types You'd Like To Backup Here
 filetypes = ('.state', '.srm')
 
+num = 0
+numdone = 0
+for root, dirs, files in os.walk(r'/home/pi/RetroPie/roms'):
+    for saves in files:
+        if saves.endswith(filetypes):
+            num += 1
+        
+print str(num) + ' Saves Found'
+
 for root, dirs, files in os.walk(r'/home/pi/RetroPie/roms'):
     for saves in files:
         file_path = root + '/' + saves
@@ -22,7 +31,9 @@ for root, dirs, files in os.walk(r'/home/pi/RetroPie/roms'):
             file_size = os.path.getsize(file_path)
             if file_size <= CHUNK_SIZE:
             
-                print dbx.files_upload(f.read(), dest_path, overwrite)
+                dbx.files_upload(f.read(), dest_path, overwrite)
+                numdone += 1
+                print str(numdone) + '/' + str(num) + ' saves uploaded'
                 
             else:
 

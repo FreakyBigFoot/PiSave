@@ -1,11 +1,11 @@
 #!/usr/bin/python
-import re, fnmatch, os, dropbox, time
+import re, os, dropbox, time
 from dropbox.files import WriteMode
 
 #This Is Your Unique Key Given By Dropbox
 dbx = dropbox.Dropbox('API_KEY')
 
-#This Forces Dropbox To Overwrite Any Exisitng Save(files) When Running This Script
+#This Forces Dropbox To Overwrite Any Exisitng Saves When Running This Script
 overwrite = WriteMode('overwrite', None)
 
 CHUNK_SIZE = 4 * 1024 * 1024
@@ -46,7 +46,7 @@ for root, dirs, files in os.walk(r'/home/pi/RetroPie/roms'):
 
                 while f.tell() < file_size:
                     if ((file_size - f.tell()) <= CHUNK_SIZE):
-                        print dbx.files_upload_session_finish(f.read(CHUNK_SIZE),
+                        dbx.files_upload_session_finish(f.read(CHUNK_SIZE),
                                                         cursor,
                                                         commit)
                         numdone += 1

@@ -11,7 +11,7 @@ overwrite = WriteMode('overwrite', None)
 CHUNK_SIZE = 4 * 1024 * 1024
 
 #Add File Types You'd Like To Backup Here
-filetypes = '(.state*|.srm*)'
+filetypes = ('\.state*|\.srm*')
 
 num = 0
 numdone = 0
